@@ -8,9 +8,9 @@ import { FiChevronDown } from "react-icons/fi"
 
 const Experience = () => {
     // Garde en mémoire quelle(s) carte(s) sont ouvertes, par id
-    const [expandedIds, setExpandedIds] = useState({})
+    const [expandedIds, setExpandedIds] = useState<Record<string | number, boolean>>({})
 
-    const toggleCard = (id) => {
+    const toggleCard = (id: string | number) => {
         setExpandedIds((prev) => ({
             ...prev,
             [id]: !prev[id],
