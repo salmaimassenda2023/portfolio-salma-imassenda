@@ -63,11 +63,11 @@ const Hero = () => {
                 {/*</h3>*/}
 
                 <h6 className="mt-3 text-xl font-normal leading-snug text-white md:text-3xl lg:text-4xl">
-                    I&apos;m a <span className="text-purple">Full-Stack Java Engineer </span> building secure, scalable web applications.
+                    I&apos;m a <span className="text-purple">Full-Stack Java Engineer </span> building functional web applications.
                 </h6>
 
 
-                <div className="mt-1 flex flex-wrap items-center justify-center gap-4">
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
                     <a href="#projects">
                         <MagicButton
                             title="View my work"
@@ -87,16 +87,14 @@ const Hero = () => {
                 </div>
 
                 {/* Tech stack */}
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
                     {STACK.map((tech) => (
                         <div
                             key={tech.name}
-                            className="flex items-center gap-2  bg-white/[0.04]
-                px-3.5 py-1.5 transition duration-200
-                hover:-translate-y-0.5  hover:bg-purple/10"
+                            className="flex items-center gap-2 opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
                         >
                             <Image src={tech.icon} alt={tech.name} width={18} height={18} />
-                            <span className="text-sm text-white/90">{tech.name}</span>
+                            <span className="text-xs text-white/70">{tech.name}</span>
                         </div>
                     ))}
                 </div>
