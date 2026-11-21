@@ -1,11 +1,33 @@
 "use client"
 import { useRef, useState } from "react"
+import type { MouseEvent, CSSProperties } from "react"
 import Link from "next/link"
 import { FaLocationArrow, FaRegStar, FaCubes } from "react-icons/fa6"
 import { projects } from "@/data"
 import { getCategoryStyle } from "@/data/categoryStyles"
 
-function CategoryBadge({ category, highlight }) {
+type Technology = {
+    name: string
+    icon: string
+}
+
+type Project = {
+    id: string | number
+    title: string
+    tagline: string
+    img: string
+    category: string
+    highlight?: string
+    technologies?: Technology[]
+}
+
+function CategoryBadge({
+                           category,
+                           highlight,
+                       }: {
+    category: string
+    highlight?: string
+}) {
     const { icon: Icon, color } = getCategoryStyle(category)
     return (
         <div className="absolute left-3 top-3 z-10 flex flex-wrap items-center gap-1.5">
@@ -23,11 +45,11 @@ function CategoryBadge({ category, highlight }) {
     )
 }
 
-function ProjectPin({ item }) {
-    const cardRef = useRef(null)
-    const [style, setStyle] = useState({})
+function ProjectPin({ item }: { item: Project }) {
+    const cardRef = useRef<HTMLDivElement>(null)
+    const [style, setStyle] = useState<CSSProperties>({})
 
-    const handleMove = (e) => {
+    const handleMove = (e: MouseEvent<HTMLDivElement>) => {
         const card = cardRef.current
         if (!card) return
         const rect = card.getBoundingClientRect()
@@ -38,7 +60,8 @@ function ProjectPin({ item }) {
         })
     }
 
-    const handleLeave = () => setStyle({ transform: "perspective(900px) rotateX(0) rotateY(0)" })
+    const handleLeave = () =>
+        setStyle({ transform: "perspective(900px) rotateX(0) rotateY(0)" })
 
     return (
         <div
@@ -96,8 +119,8 @@ export default function Portfolio() {
                 <span className="text-purple"> Projects</span>
             </h1>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-5 pt-5">
-                {projects.map((item) => (
+            <div className="mt-5 grid grid-cols-1 gap-8 pt-5 sm:grid-cols-2 lg:grid-cols-3">
+                {(projects as Project[]).map((item) => (
                     <ProjectPin key={item.id} item={item} />
                 ))}
             </div>
